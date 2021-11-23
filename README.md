@@ -3,7 +3,7 @@
 ## Website Link
 
 ## Repository Link
-https://github.com/SebastianCasado/Caffeine-Overlflow
+https://github.com/msdale/caffeine-overflow
 
 ## Description
 >A web browser ran application that compares pricing for items at local retailers, as well as shows the distance from the user to the store so that the user can take into consideration time and gas costs. User can then build shopping lists for each retailer and print or email lists for use at the store. 
