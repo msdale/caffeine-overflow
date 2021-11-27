@@ -51,7 +51,7 @@ const drivingDistance = async function (_shopperAddr, _storeAddr) {
               "avgTimeInSeconds": avgTimeInSeconds,
               "trafficTimeInSeconds": trafficTimeInSeconds};
   return json;
-}
+};
 
 /**
  * targetLocator() - Target brick and mortar location search (to find closest location).
@@ -99,7 +99,7 @@ const targetLocator = async function (_zipCode, _radiusInMiles) {
               "zipCode": postal_code,
               "location_id": location_id};
   return json;
-}
+};
 
 /**
  * targetProductLocator() - Target product search
@@ -191,7 +191,7 @@ const walmartLocator = async function (_zipCode) {
               "state": state,
               "zipCode": postal_code};
   return json;
-}
+};
 
 
 /**
@@ -236,4 +236,4 @@ const walmartProductLocator = async function (_productDescription) {
     });
   }
   return json;
-}
+};
