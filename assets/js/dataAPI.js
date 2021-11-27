@@ -129,7 +129,6 @@ const targetProductLocator = async function (_location_id, _productDescription) 
                             "x-rapidapi-key": "9813878aa1msh7c70fcdc9bbf8a6p1e1f78jsn1ff70bded748"
                          }
             }; 
-  console.log(apiURL);
   // execute the API call to the URL
   var jsonProductResults = await getAPIData(apiURL, headers);
           
