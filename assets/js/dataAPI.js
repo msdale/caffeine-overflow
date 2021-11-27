@@ -47,9 +47,9 @@ const drivingDistance = async function (_shopperAddr, _storeAddr) {
   var trafficTimeInSeconds = jsonTravelDistance.resourceSets[0].resources[0].travelDuration;
 
   // build a concise JSON object to return
-  var json = {"distanceInMiles": distanceInMiles,
-              "avgTimeInSeconds": avgTimeInSeconds,
-              "trafficTimeInSeconds": trafficTimeInSeconds};
+  var json = {"distanceInMiles": Math.trunc(distanceInMiles),
+              "avgTimeInMinutes": Math.trunc((avgTimeInSeconds / 60)),
+              "trafficTimeInMinutes": Math.trunc((trafficTimeInSeconds / 60))};
   return json;
 };
 
@@ -86,11 +86,11 @@ const targetLocator = async function (_zipCode, _radiusInMiles) {
   var jsonTargetLocation = await getAPIData(apiURL, headers);
 
   // parse out pertinent data content returned
-  var address_line1 = jsonTargetLocation.locations[0].address.address_line1;
-  var city = jsonTargetLocation.locations[0].address.city;
-  var state = jsonTargetLocation.locations[0].address.state;
-  var postal_code = jsonTargetLocation.locations[0].address.postal_code;
-  var location_id = jsonTargetLocation.locations[0].location_id;
+  var address_line1 = await jsonTargetLocation.locations[0].address.address_line1;
+  var city = await jsonTargetLocation.locations[0].address.city;
+  var state = await jsonTargetLocation.locations[0].address.state;
+  var postal_code = await jsonTargetLocation.locations[0].address.postal_code;
+  var location_id = await jsonTargetLocation.locations[0].location_id;
 
   // build a concise JSON object to return
   var json = {"address": address_line1,
@@ -118,11 +118,10 @@ const targetLocator = async function (_zipCode, _radiusInMiles) {
  */
 const targetProductLocator = async function (_location_id, _productDescription) {
   // transform parameters for URL syntax
-  var location_id = _location_id.trim();
   var productDescription = _productDescription.trim().replaceAll(/,/g, ' ').replaceAll(/ +/g, ' ').replaceAll(' ', '+');
 
   // construct the URL for Target product search endpoint
-  var apiURL = "https://target-com-store-product-reviews-locations-data.p.rapidapi.com/product/search?store_id=" + location_id + "&keyword=" + productDescription + "&offset=0&limit=10&rating=0&sort_by=pricelow"; // REST endpoint
+  var apiURL = "https://target-com-store-product-reviews-locations-data.p.rapidapi.com/product/search?store_id=" + _location_id + "&keyword=" + productDescription + "&offset=0&limit=5&rating=0&sort_by=pricelow"; // REST endpoint
   var headers = {
               "method": "GET",
               "headers": {
@@ -130,7 +129,7 @@ const targetProductLocator = async function (_location_id, _productDescription) 
                             "x-rapidapi-key": "9813878aa1msh7c70fcdc9bbf8a6p1e1f78jsn1ff70bded748"
                          }
             }; 
-
+  console.log(apiURL);
   // execute the API call to the URL
   var jsonProductResults = await getAPIData(apiURL, headers);
           
@@ -226,8 +225,12 @@ const walmartProductLocator = async function (_productDescription) {
   var jsonProductResults = await getAPIData(apiURL, headers);
           
   // parse out pertinent data content returned and build concise JSON object to return
+  var limit = 5; // imposed limit on items returned
   var json = {"items":[]};
   for (var i = 0; i < jsonProductResults.data.search.searchResult.itemStacks[0].items.length; i++) {
+    if (i === limit) {
+      break;
+    }
     json.items.push({
       "image": jsonProductResults.data.search.searchResult.itemStacks[0].items[i].imageInfo.thumbnailUrl,
       "description": jsonProductResults.data.search.searchResult.itemStacks[0].items[i].name,
