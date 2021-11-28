@@ -1,19 +1,56 @@
 
 
-const getAPIData = async (_apiURL, _headers=null) => {
+const getAPIData = async (_apiURL, _headers = null) => {
   var response;
-  if (_headers) {
-    response = await fetch(_apiURL, _headers);
-  } else {
-    response = await fetch(_apiURL);
-  }
-  if (!response.ok) {
-    alert('Error: ' + response.statusText);
+  try {
+    if (_headers) {
+      response = await fetch(_apiURL, _headers);
+    } else {
+      response = await fetch(_apiURL);
+    }
+    if (!response.ok) {
+      alertAPIFailure("failed API call");
+    }
+  } catch (err) {
+      alertAPIFailure(err);
   }
   const json = await response.json();
   return await json;
 };
 
+var alertEl = document.createElement("div");
+var alertBtnEl = document.createElement("button");
+var alertParentEl = document.querySelector("main section .columns .column");
+
+var alertAPIFailure = function (msg) {
+  alertEl.style.display = "flex";
+  alertEl.style.alignContent = "center";
+  alertEl.style.alignItems = "center";
+  alertEl.style.justifyContent = "center";
+  alertEl.style.flexDirection = "column";
+  alertEl.style.position = "fixed";
+  alertEl.style.width = "300px";
+  alertEl.style.height = "100px";
+  alertEl.style.backgroundColor = "yellow";
+  alertEl.style.zIndex = "1";
+  alertEl.style.fontSize = "20px";
+  alertEl.textContent = msg;
+  alertBtnEl.style.height = "50px";
+  alertBtnEl.style.width = "100px";
+  alertBtnEl.style.backgroundColor = "red";
+  alertBtnEl.style.color = "black";
+  alertBtnEl.style.justifyContent = "center";
+  alertBtnEl.style.alignItems = "center";
+  alertBtnEl.textContent = "CONFIRMED";
+  alertEl.appendChild(alertBtnEl);
+  alertParentEl.appendChild(alertEl);
+  alertBtnEl.addEventListener("click", clearAlert);
+};
+
+var clearAlert = function () {
+  removeAllChildNodes(alertEl);
+  alertEl.remove();
+};
 
 /**
  * drivingDistance() - Driving distance and drive time
@@ -40,16 +77,21 @@ const drivingDistance = async function (_shopperAddr, _storeAddr) {
 
   // execute the API call to the URL
   var jsonTravelDistance = await getAPIData(apiURL);
+  if (jsonTravelDistance && jsonTravelDistance.failure) {
+
+  }
 
   // parse out pertinent data content returned
   var distanceInMiles = jsonTravelDistance.resourceSets[0].resources[0].travelDistance;
-  var avgTimeInSeconds =  jsonTravelDistance.resourceSets[0].resources[0].travelDuration;
+  var avgTimeInSeconds = jsonTravelDistance.resourceSets[0].resources[0].travelDuration;
   var trafficTimeInSeconds = jsonTravelDistance.resourceSets[0].resources[0].travelDuration;
 
   // build a concise JSON object to return
-  var json = {"distanceInMiles": Math.trunc(distanceInMiles),
-              "avgTimeInMinutes": Math.trunc((avgTimeInSeconds / 60)),
-              "trafficTimeInMinutes": Math.trunc((trafficTimeInSeconds / 60))};
+  var json = {
+    "distanceInMiles": Math.trunc(distanceInMiles),
+    "avgTimeInMinutes": Math.trunc((avgTimeInSeconds / 60)),
+    "trafficTimeInMinutes": Math.trunc((trafficTimeInSeconds / 60))
+  };
   return json;
 };
 
@@ -75,13 +117,13 @@ const targetLocator = async function (_zipCode, _radiusInMiles) {
   // construct the URL for target-com-store-product-reviews-locations-data endpoint
   var apiURL = "https://target-com-store-product-reviews-locations-data.p.rapidapi.com/location/search?zip=" + _zipCode + "&radius=" + _radiusInMiles;  // REST endpoint
   var headers = {
-              "method": "GET",
-              "headers": {
-                            "x-rapidapi-host": "target-com-store-product-reviews-locations-data.p.rapidapi.com",
-                            "x-rapidapi-key": "9813878aa1msh7c70fcdc9bbf8a6p1e1f78jsn1ff70bded748"
-                         }
-            }; 
-  
+    "method": "GET",
+    "headers": {
+      "x-rapidapi-host": "target-com-store-product-reviews-locations-data.p.rapidapi.com",
+      "x-rapidapi-key": "9813878aa1msh7c70fcdc9bbf8a6p1e1f78jsn1ff70bded748"
+    }
+  };
+
   // execute the API call to the URL
   var jsonTargetLocation = await getAPIData(apiURL, headers);
 
@@ -93,11 +135,13 @@ const targetLocator = async function (_zipCode, _radiusInMiles) {
   var location_id = await jsonTargetLocation.locations[0].location_id;
 
   // build a concise JSON object to return
-  var json = {"address": address_line1,
-              "city": city,
-              "state": state,
-              "zipCode": postal_code,
-              "location_id": location_id};
+  var json = {
+    "address": address_line1,
+    "city": city,
+    "state": state,
+    "zipCode": postal_code,
+    "location_id": location_id
+  };
   return json;
 };
 
@@ -123,17 +167,17 @@ const targetProductLocator = async function (_location_id, _productDescription) 
   // construct the URL for Target product search endpoint
   var apiURL = "https://target-com-store-product-reviews-locations-data.p.rapidapi.com/product/search?store_id=" + _location_id + "&keyword=" + productDescription + "&offset=0&limit=5&rating=0&sort_by=pricelow"; // REST endpoint
   var headers = {
-              "method": "GET",
-              "headers": {
-                            "x-rapidapi-host": "target-com-store-product-reviews-locations-data.p.rapidapi.com",
-                            "x-rapidapi-key": "9813878aa1msh7c70fcdc9bbf8a6p1e1f78jsn1ff70bded748"
-                         }
-            }; 
+    "method": "GET",
+    "headers": {
+      "x-rapidapi-host": "target-com-store-product-reviews-locations-data.p.rapidapi.com",
+      "x-rapidapi-key": "9813878aa1msh7c70fcdc9bbf8a6p1e1f78jsn1ff70bded748"
+    }
+  };
   // execute the API call to the URL
   var jsonProductResults = await getAPIData(apiURL, headers);
-          
+
   // parse out pertinent data content returned and build concise JSON object to return
-  var json = {"items":[]};
+  var json = { "items": [] };
   for (var i = 0; i < jsonProductResults.products.length; i++) {
     json.items.push({
       "image": jsonProductResults.products[i].item.enrichment.images.primary_image_url,
@@ -167,13 +211,13 @@ const walmartLocator = async function (_zipCode) {
   var apiURL = "https://walmart.p.rapidapi.com/stores/list?postalCode=" + _zipCode; // REST endpoint
 
   var headers = {
-              "method": "GET",
-              "headers": {
-                            "x-rapidapi-host": "walmart.p.rapidapi.com",
-                            "x-rapidapi-key": "9813878aa1msh7c70fcdc9bbf8a6p1e1f78jsn1ff70bded748"
-                         }
-            }; 
-  
+    "method": "GET",
+    "headers": {
+      "x-rapidapi-host": "walmart.p.rapidapi.com",
+      "x-rapidapi-key": "9813878aa1msh7c70fcdc9bbf8a6p1e1f78jsn1ff70bded748"
+    }
+  };
+
   // execute the API call to the URL
   var jsonWalmartLocation = await getAPIData(apiURL, headers);
 
@@ -184,10 +228,12 @@ const walmartLocator = async function (_zipCode) {
   var postal_code = jsonWalmartLocation.data.storesBySearchTerm.stores[0].address.postalCode;
 
   // build a concise JSON object to return
-  var json = {"address": address,
-              "city": city,
-              "state": state,
-              "zipCode": postal_code};
+  var json = {
+    "address": address,
+    "city": city,
+    "state": state,
+    "zipCode": postal_code
+  };
   return json;
 };
 
@@ -213,19 +259,19 @@ const walmartProductLocator = async function (_productDescription) {
   // construct the URL for Walmart product search endpoint
   var apiURL = "https://walmart.p.rapidapi.com/products/v2/list?query=" + productDescription + "&sort=price_low";  // REST endpoint
   var headers = {
-              "method": "GET",
-              "headers": {
-                            "x-rapidapi-host": "walmart.p.rapidapi.com",
-                            "x-rapidapi-key": "9813878aa1msh7c70fcdc9bbf8a6p1e1f78jsn1ff70bded748"
-                         }
-            }; 
+    "method": "GET",
+    "headers": {
+      "x-rapidapi-host": "walmart.p.rapidapi.com",
+      "x-rapidapi-key": "9813878aa1msh7c70fcdc9bbf8a6p1e1f78jsn1ff70bded748"
+    }
+  };
 
   // execute the API call to the URL
   var jsonProductResults = await getAPIData(apiURL, headers);
-          
+
   // parse out pertinent data content returned and build concise JSON object to return
   var limit = 5; // imposed limit on items returned
-  var json = {"items":[]};
+  var json = { "items": [] };
   for (var i = 0; i < jsonProductResults.data.search.searchResult.itemStacks[0].items.length; i++) {
     if (i === limit) {
       break;
