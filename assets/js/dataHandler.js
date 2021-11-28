@@ -30,22 +30,21 @@ var populateLocationElements = async function (_inputAddress) {
   console.log("READY TO POPULATE ON THE PAGE");
   console.log("TARGET LOCATION");
   console.log(jsonTargetLocation);
-  console.log("DRIVE TO TARGET LOCATION");
   console.log(jsonDrivingDistanceToTarget);
   console.log("*********************************");
   var targetHeaderEl = document.querySelector("#target-info");
   removeAllChildNodes(targetHeaderEl);
-  var targetAddressEl = document.createElement("p");
-  targetAddressEl.textContent = jsonTargetLocation.address + ", " + jsonTargetLocation.city + " " + jsonTargetLocation.state + ", " + jsonTargetLocation.zipCode;
+  var targetAddressEl = document.createElement("h2");
+  targetAddressEl.textContent = "Store Address: " + jsonTargetLocation.address + ", " + jsonTargetLocation.city + " " + jsonTargetLocation.state + ", " + jsonTargetLocation.zipCode;
   targetHeaderEl.appendChild(targetAddressEl);
   var targetMilesEl = document.createElement("p");
-  targetMilesEl.textContent = jsonDrivingDistanceToTarget.distanceInMiles + " Miles";
+  targetMilesEl.textContent = "Distance to Store: " + jsonDrivingDistanceToTarget.distanceInMiles + " Miles";
   targetHeaderEl.appendChild(targetMilesEl);
   var targetAvgDriveTimeEl = document.createElement("p");
-  targetAvgDriveTimeEl.textContent = jsonDrivingDistanceToTarget.avgTimeInMinutes + " Min";
+  targetAvgDriveTimeEl.textContent = "Average Time: " + jsonDrivingDistanceToTarget.avgTimeInMinutes + " Min";
   targetHeaderEl.appendChild(targetAvgDriveTimeEl);
   var targetTrafficDriveTimeEl = document.createElement("p");
-  targetTrafficDriveTimeEl.textContent = jsonDrivingDistanceToTarget.trafficTimeInMinutes + " Min";
+  targetTrafficDriveTimeEl.textContent = "Current Traffic Time: " + jsonDrivingDistanceToTarget.trafficTimeInMinutes + " Min";
   targetHeaderEl.appendChild(targetTrafficDriveTimeEl);
 
   /*
@@ -67,17 +66,17 @@ var populateLocationElements = async function (_inputAddress) {
   console.log("*********************************");
   var walmartHeaderEl = document.querySelector("#walmart-info");
   removeAllChildNodes(walmartHeaderEl);
-  var walmartAddressEl = document.createElement("p");
-  walmartAddressEl.textContent = jsonWalmartLocation.address + ", " + jsonWalmartLocation.city + " " + jsonWalmartLocation.state + ", " + jsonWalmartLocation.zipCode;
+  var walmartAddressEl = document.createElement("h2");
+  walmartAddressEl.textContent = "Store Address: " + jsonWalmartLocation.address + ", " + jsonWalmartLocation.city + " " + jsonWalmartLocation.state + ", " + jsonWalmartLocation.zipCode;
   walmartHeaderEl.appendChild(walmartAddressEl);
   var walmartMilesEl = document.createElement("p");
-  walmartMilesEl.textContent = jsonDrivingDistanceToWalmart.distanceInMiles + " Miles";
+  walmartMilesEl.textContent = "Distance to Store: " +  jsonDrivingDistanceToWalmart.distanceInMiles + " Miles";
   walmartHeaderEl.appendChild(walmartMilesEl);
   var walmartAvgDriveTimeEl = document.createElement("p");
-  walmartAvgDriveTimeEl.textContent = jsonDrivingDistanceToWalmart.avgTimeInMinutes + " Min";
+  walmartAvgDriveTimeEl.textContent = "Average Time: " + jsonDrivingDistanceToWalmart.avgTimeInMinutes + " Min";
   walmartHeaderEl.appendChild(walmartAvgDriveTimeEl);
   var walmartTrafficDriveTimeEl = document.createElement("p");
-  walmartTrafficDriveTimeEl.textContent = jsonDrivingDistanceToWalmart.trafficTimeInMinutes + " Min";
+  walmartTrafficDriveTimeEl.textContent = "Current Traffic Time: " + jsonDrivingDistanceToWalmart.trafficTimeInMinutes + " Min";
   walmartHeaderEl.appendChild(walmartTrafficDriveTimeEl);
 
 
@@ -119,7 +118,7 @@ var populateItemElements = async function (location_id, _itemDesc) {
     itemEl.appendChild(itemDescEl);
 
     // price
-    var itemPriceEl = document.createElement("p");
+    var itemPriceEl = document.createElement("h1");
     itemPriceEl.textContent = jsonTargetItemList.items[i].formattedPrice;
     itemEl.appendChild(itemPriceEl);
 
@@ -156,7 +155,7 @@ var populateItemElements = async function (location_id, _itemDesc) {
     itemEl.appendChild(itemDescEl);
 
     // price
-    var itemPriceEl = document.createElement("p");
+    var itemPriceEl = document.createElement("h1");
     itemPriceEl.textContent = jsonWalmartItemList.items[i].foramattedPrice;
     itemEl.appendChild(itemPriceEl);
 
