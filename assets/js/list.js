@@ -1,4 +1,4 @@
-//js for shopping list page
+//js for shopping list page for release 2.0
 
 // var targetList = "Target: []";
 
