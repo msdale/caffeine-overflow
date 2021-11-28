@@ -78,55 +78,23 @@
             <!-- connection to JS file to bring in results -->
             <div class="columns">
                 <div class="column">
-                    <!--CARD 1 SEARCH RESULTS: TARGET-->
-                    <div class="card">
-                        <header id="target-info" class="card-header">
-                            <p class="card-header-title">
-                                Target
-                            </p>
-                        </header>
-                        <div class="media-content">
-                            <p class="title is-4">Item List</p>
+                    <!--BOX 1 SEARCH RESULTS: TARGET-->
+                    <h3 class="title is-3">Target:</h3>
+                    <div class="box">
+                        <h3 id="target-info" class="title is-4"></h3>
+                        <div class="box">
+                            <ul id="target-items"></ul>
                         </div>
-                        <div class="card-image">
-                          <ul id="target-items"></ul>
-                            <!--<figure class="image is-1by1">
-                                <img src="https://bulma.io/images/placeholders/480x480.png" alt="Placeholder image">
-                            </figure>-->
-                        </div>
-                        <div class="media-content">
-                            <!--<p class="title is-4">Item Description</p>-->
-                            <!--<h3 class="title is-3">Price</h3>-->
-                        </div>
-                        <!--<footer class="card-footer">
-                            <a href="#" class="card-footer-item">Add to List</a>
-                        </footer>-->
                     </div>
                 </div>
                 <div class="column">
-                    <!--CARD 2 SEARCH RESULTS: WALMART-->
-                    <div class="card">
-                        <header id="walmart-info" class="card-header">
-                            <p class="card-header-title">
-                                Walmart
-                            </p>
-                        </header>
-                        <div class="media-content">
-                            <p class="title is-4">Item List</p>
+                    <!--BOX 2 SEARCH RESULTS: WALMART-->
+                    <h3 class="title is-3">Walmart:</h3>
+                    <div class="box">
+                        <h3 id="walmart-info" class="title is-4"></h3>
+                        <div class="box">
+                            <ul id="walmart-items"></ul>
                         </div>
-                        <div class="card-image">
-                          <ul id="walmart-items"></ul>
-                            <!--<figure class="image is-1by1">
-                                <img src="https://bulma.io/images/placeholders/480x480.png" alt="Placeholder image">
-                            </figure>-->
-                        </div>
-                        <div class="media-content">
-                            <!--<p class="title is-4">Item Description</p>-->
-                            <!--<h3 class="title is-3">Price</h3>-->
-                        </div>
-                        <!--<footer class="card-footer">
-                            <a href="#" class="card-footer-item">Add to List</a>
-                        </footer>-->
                     </div>
                 </div>
             </div>
@@ -136,7 +104,9 @@
         <!--View Shopping List-->
         <section class="section">
             <h2 class="title is-2">View Shopping List</h2>
+            <a href="./shopping-list.html">
             <button id="view-list" class="button is-info">Click Here to View List</button>
+            </a>
             <ul id="target-shopping-list"></ul>
             <ul id="walmart-shopping-list"></ul>
         </section>
