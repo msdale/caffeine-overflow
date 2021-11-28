@@ -250,6 +250,13 @@ walmartItemsEl.addEventListener("click", saveWalmartItem);
 var viewListBtnEl = document.getElementById("view-list");
 viewListBtnEl.addEventListener("click", viewShoppingList);
 
+//check if enter key hit instead of click
+// $("#item-desc").keypress(function(event) {
+//   if (event.which === 13) {
+//       $("#search-button").click();
+//   }
+// })
+
 
 //var tryit = async function (shopperAddr, itemDesc) {
 //  var target_location_id = await populateLocationElements(shopperAddr);
