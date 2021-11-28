@@ -1,18 +1,21 @@
 var shopperAddr = "";
 var itemDesc = "";
+var shoppingList = {"Target": [], "Walmart": []};
+localStorage.clear();
+localStorage.setItem("shoppingList", JSON.stringify(shoppingList));
 
 var populateLocationElements = async function (_inputAddress) {
-  var addrArray = _inputAddress.split(" "); 
-  var zipCode = addrArray[addrArray.length-1];
+  var addrArray = _inputAddress.split(" ");
+  var zipCode = addrArray[addrArray.length - 1];
 
   /*
    * Target Data
    */
-  var jsonTargetLocation = await targetLocator(zipCode,"20");
+  var jsonTargetLocation = await targetLocator(zipCode, "20");
 
   // need for driving distance calculator
   var targetAddr = await jsonTargetLocation.address + ", " + jsonTargetLocation.city + " " + jsonTargetLocation.state + ", " + jsonTargetLocation.zipCode;
-  
+
   var jsonDrivingDistanceToTarget = await drivingDistance(_inputAddress, targetAddr);
 
   // HERE"S WHERE YOU POPULATE THE PAGE WITH TARGET DATA
@@ -43,7 +46,7 @@ var populateLocationElements = async function (_inputAddress) {
 
   // need for driving distance calculator
   var walmartAddr = await jsonWalmartLocation.address + ", " + jsonWalmartLocation.city + " " + jsonWalmartLocation.state + ", " + jsonWalmartLocation.zipCode;
-  
+
   var jsonDrivingDistanceToWalmart = await drivingDistance(_inputAddress, walmartAddr);
 
   // HERE"S WHERE YOU POPULATE THE PAGE WITH WALMART DATA
@@ -71,43 +74,129 @@ var populateLocationElements = async function (_inputAddress) {
   return jsonTargetLocation.location_id; // need for target item lookup
 };
 
-var getshopperaddr = async function(){
+var target_location_id = "";
+var getshopperaddr = async function (event) {
+  // prevent page from refreshing
+  event.preventDefault();
   var shopperAddrEl = document.getElementById("address-input");
   var addr = shopperAddrEl.value;
-  var location_id = await populateLocationElements (addr);
+  target_location_id = await populateLocationElements(addr);
+};
 
-}
-//tryit(shopperAddr, itemDesc);
-var enterBtn = document.getElementById("enter-button");
-enterBtn.addEventListener("click",getshopperaddr);
+var enterBtnEl = document.getElementById("enter-button");
+enterBtnEl.addEventListener("click", getshopperaddr);
 
 var populateItemElements = async function (location_id, _itemDesc) {
+  // Target Data
+  var jsonTargetItemList = await targetProductLocator(location_id, _itemDesc);
 
-  /*
-   * Target Data
-   */
-  var jsonItemList = await targetProductLocator(location_id, _itemDesc);
-
+  var targetItemsList = document.getElementById("target-items");
   // HERE"S WHERE YOU POPULATE THE PAGE WITH TARGET DATA
   console.log("READY TO POPULATE ON THE PAGE");
   console.log("TARGET PRODUCT LIST");
-  console.log(jsonItemList);
+  console.log(jsonTargetItemList);
   console.log("*********************************");
+  var targetItemsEl = document.getElementById("target-items");
+  for (var i = 0; i < jsonTargetItemList.items.length; i++) {
+    // image
+    var itemEl = document.createElement("li");
+    itemEl.innerHTML = '<image src="' + jsonTargetItemList.items[i].image + '" alt="Placeholder image">';
 
-  /*
-   * Walmart Data
-   */
-  var jsonItemList = await walmartProductLocator(_itemDesc);
+    // description
+    var itemDescEl = document.createElement("p");
+    itemDescEl.textContent = jsonTargetItemList.items[i].description.title;
+    itemEl.appendChild(itemDescEl);
 
+    // price
+    var itemPriceEl = document.createElement("p");
+    itemPriceEl.textContent = jsonTargetItemList.items[i].formattedPrice;
+    itemEl.appendChild(itemPriceEl);
+
+    // button
+    var itemButtonEl = document.createElement("button");
+    itemButtonEl.textContent = "Add To Shopping List";
+    itemEl.appendChild(itemButtonEl);
+
+    targetItemsEl.appendChild(itemEl);
+  }
+  console.log(targetItemsEl);
+
+
+  // Walmart Data
+  var jsonWalmartItemList = await walmartProductLocator(_itemDesc);
+
+  var walmartItemsList = document.getElementById("walmart-items");
   // HERE"S WHERE YOU POPULATE THE PAGE WITH WALMART DATA
   console.log("READY TO POPULATE ON THE PAGE");
   console.log("WALMART PRODUCT LIST");
-  console.log(jsonItemList);
+  console.log(jsonWalmartItemList);
   console.log("*********************************");
+  var walmartItemsEl = document.getElementById("walmart-items");
+  for (var i = 0; i < jsonWalmartItemList.items.length; i++) {
+    // image
+    var itemEl = document.createElement("li");
+    itemEl.innerHTML = '<image src="' + jsonWalmartItemList.items[i].image + '" alt="Placeholder image">';
+
+    // description
+    var itemDescEl = document.createElement("p");
+    itemDescEl.textContent = jsonWalmartItemList.items[i].description;
+    itemEl.appendChild(itemDescEl);
+
+    // price
+    var itemPriceEl = document.createElement("p");
+    itemPriceEl.textContent = jsonWalmartItemList.items[i].foramattedPrice;
+    itemEl.appendChild(itemPriceEl);
+
+    // button
+    var itemButtonEl = document.createElement("button");
+    itemButtonEl.textContent = "Add To Shopping List";
+    itemEl.appendChild(itemButtonEl);
+
+    walmartItemsEl.appendChild(itemEl);
+  }
+  console.log(walmartItemsEl);
 };
 
-var tryit = async function (shopperAddr, itemDesc) {
-  var target_location_id = await populateLocationElements(shopperAddr);
-  populateItemElements(target_location_id, itemDesc);
+var listItems = async function (event) {
+  // prevent page from refreshing
+  event.preventDefault();
+
+  var itemDescEl = document.getElementById("item-desc");
+  var itemDesc = itemDescEl.value;
+  await populateItemElements(target_location_id, itemDesc);
 };
+
+var searchBtnEl = document.getElementById("search-button");
+searchBtnEl.addEventListener("click", listItems);
+
+
+var saveTargetItem = function (event) {
+  // prevent page from refreshing
+  event.preventDefault();
+  parentEl = event.target.parentElement;
+  shoppingList = JSON.parse(localStorage.getItem("shoppingList"));
+  shoppingList.Target.push({"description": parentEl.children[1].textContent, "image": parentEl.children[0], "formattedPrice": parentEl.children[2].textContent});
+  localStorage.setItem("shoppingList", JSON.stringify(shoppingList));
+};
+
+var saveWalmartItem = function (event) {
+  // prevent page from refreshing
+  event.preventDefault();
+  parentEl = event.target.parentElement;
+  shoppingList = JSON.parse(localStorage.getItem("shoppingList"));
+  shoppingList.Walmart.push({"description": parentEl.children[1].textContent, "image": parentEl.children[0], "formattedPrice": parentEl.children[2].textContent});
+  localStorage.setItem("shoppingList", JSON.stringify(shoppingList));
+};
+
+
+var targetItemsEl = document.getElementById("target-items");
+targetItemsEl.addEventListener("click", saveTargetItem);
+var walmartItemsEl = document.getElementById("walmart-items");
+walmartItemsEl.addEventListener("click", saveWalmartItem);
+
+
+//var tryit = async function (shopperAddr, itemDesc) {
+//  var target_location_id = await populateLocationElements(shopperAddr);
+//  populateItemElements(target_location_id, itemDesc);
+//};
 
