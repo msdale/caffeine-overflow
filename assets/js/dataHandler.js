@@ -110,7 +110,7 @@ var populateItemElements = async function (location_id, _itemDesc) {
   for (var i = 0; i < jsonTargetItemList.items.length; i++) {
     // image
     var itemEl = document.createElement("li");
-    itemEl.innerHTML = '<image src="' + jsonTargetItemList.items[i].image + '" alt="Placeholder image">';
+    itemEl.innerHTML = '<image src="' + jsonTargetItemList.items[i].image + '" style="width: 30%;" alt="Placeholder image">';
 
     // description
     var itemDescEl = document.createElement("p");
@@ -147,7 +147,7 @@ var populateItemElements = async function (location_id, _itemDesc) {
   for (var i = 0; i < jsonWalmartItemList.items.length; i++) {
     // image
     var itemEl = document.createElement("li");
-    itemEl.innerHTML = '<image src="' + jsonWalmartItemList.items[i].image + '" alt="Placeholder image">';
+    itemEl.innerHTML = '<image src="' + jsonWalmartItemList.items[i].image + '" style="width: 30%;" alt="Placeholder image">';
 
     // description
     var itemDescEl = document.createElement("p");
