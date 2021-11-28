@@ -34,17 +34,18 @@ var populateLocationElements = async function (_inputAddress) {
   console.log(jsonDrivingDistanceToTarget);
   console.log("*********************************");
   var targetHeaderEl = document.querySelector("#target-info");
+  removeAllChildNodes(targetHeaderEl);
   var targetAddressEl = document.createElement("p");
   targetAddressEl.textContent = jsonTargetLocation.address + ", " + jsonTargetLocation.city + " " + jsonTargetLocation.state + ", " + jsonTargetLocation.zipCode;
   targetHeaderEl.appendChild(targetAddressEl);
   var targetMilesEl = document.createElement("p");
-  targetMilesEl.textContent = jsonDrivingDistanceToTarget.distanceInMiles;
+  targetMilesEl.textContent = jsonDrivingDistanceToTarget.distanceInMiles + " Miles";
   targetHeaderEl.appendChild(targetMilesEl);
   var targetAvgDriveTimeEl = document.createElement("p");
-  targetAvgDriveTimeEl.textContent = jsonDrivingDistanceToTarget.avgTimeInMinutes;
+  targetAvgDriveTimeEl.textContent = jsonDrivingDistanceToTarget.avgTimeInMinutes + " Min";
   targetHeaderEl.appendChild(targetAvgDriveTimeEl);
   var targetTrafficDriveTimeEl = document.createElement("p");
-  targetTrafficDriveTimeEl.textContent = jsonDrivingDistanceToTarget.trafficTimeInMinutes;
+  targetTrafficDriveTimeEl.textContent = jsonDrivingDistanceToTarget.trafficTimeInMinutes + " Min";
   targetHeaderEl.appendChild(targetTrafficDriveTimeEl);
 
   /*
@@ -65,17 +66,18 @@ var populateLocationElements = async function (_inputAddress) {
   console.log(jsonDrivingDistanceToWalmart);
   console.log("*********************************");
   var walmartHeaderEl = document.querySelector("#walmart-info");
+  removeAllChildNodes(walmartHeaderEl);
   var walmartAddressEl = document.createElement("p");
   walmartAddressEl.textContent = jsonWalmartLocation.address + ", " + jsonWalmartLocation.city + " " + jsonWalmartLocation.state + ", " + jsonWalmartLocation.zipCode;
   walmartHeaderEl.appendChild(walmartAddressEl);
   var walmartMilesEl = document.createElement("p");
-  walmartMilesEl.textContent = jsonDrivingDistanceToWalmart.distanceInMiles;
+  walmartMilesEl.textContent = jsonDrivingDistanceToWalmart.distanceInMiles + " Miles";
   walmartHeaderEl.appendChild(walmartMilesEl);
   var walmartAvgDriveTimeEl = document.createElement("p");
-  walmartAvgDriveTimeEl.textContent = jsonDrivingDistanceToWalmart.avgTimeInMinutes;
+  walmartAvgDriveTimeEl.textContent = jsonDrivingDistanceToWalmart.avgTimeInMinutes + " Min";
   walmartHeaderEl.appendChild(walmartAvgDriveTimeEl);
   var walmartTrafficDriveTimeEl = document.createElement("p");
-  walmartTrafficDriveTimeEl.textContent = jsonDrivingDistanceToWalmart.trafficTimeInMinutes;
+  walmartTrafficDriveTimeEl.textContent = jsonDrivingDistanceToWalmart.trafficTimeInMinutes + " Min";
   walmartHeaderEl.appendChild(walmartTrafficDriveTimeEl);
 
 
