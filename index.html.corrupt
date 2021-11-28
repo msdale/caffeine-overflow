@@ -48,10 +48,10 @@
             <p class="subtitle is-4">Please enter your address to find store locations closest to you:</p>
             <div class="columns">
                 <div class="column">
-                    <input id="address-input" class="input is-info" type="text" placeholder="Address: City, State & Zip Code"/>
+                    <input id="addressInput" class="input is-info" type="text" placeholder="Address: City, State & Zip Code"/>
                 </div>
                 <div class="column">
-                    <button id="enter-button" class="button is-info">Enter</button>
+                    <button id="enterBtn" class="button is-info">Enter</button>
                 </div>
             </div>
         </section>
@@ -89,13 +89,7 @@
                             <p class="title is-4">Item Name</p>
                         </div>
                         <div class="card-image">
-                            <figure class="image is-1by1">
-                                <img src="https://bulma.io/images/placeholders/480x480.png" alt="Placeholder image">
-                            </figure>
-                        </div>
-                        <div class="media-content">
-                            <p class="title is-4">Item Description</p>
-                            <h3 class="title is-3">Price</h3>
+                            <figure class="image 4400 Baptist Island Road, Groveland Fl, 34736/h3>
                         </div>
                         <footer class="card-footer">
                             <a href="#" class="card-footer-item">Add to List</a>
@@ -152,4 +146,3 @@
     <script src="./assets/js/dataHandler.js"></script>
 </body>
 </html>
-

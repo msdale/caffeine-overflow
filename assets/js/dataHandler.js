@@ -1,8 +1,5 @@
-var shopperAddr = "4400 Baptist Island Road, Groveland Fl, 34736";
-console.log("SHOPPER ADDRESS: " + shopperAddr);
-var itemDesc = "Fresh Bananas";
-console.log("ITEM DESCRIPTION: " + itemDesc);
-console.log("*********************************");
+var shopperAddr = "";
+var itemDesc = "";
 
 var populateLocationElements = async function (_inputAddress) {
   var addrArray = _inputAddress.split(" "); 
@@ -25,6 +22,19 @@ var populateLocationElements = async function (_inputAddress) {
   console.log("DRIVE TO TARGET LOCATION");
   console.log(jsonDrivingDistanceToTarget);
   console.log("*********************************");
+  var targetHeaderEl = document.querySelector("#target-info");
+  var targetAddressEl = document.createElement("p");
+  targetAddressEl.textContent = jsonTargetLocation.address + ", " + jsonTargetLocation.city + " " + jsonTargetLocation.state + ", " + jsonTargetLocation.zipCode;
+  targetHeaderEl.appendChild(targetAddressEl);
+  var targetMilesEl = document.createElement("p");
+  targetMilesEl.textContent = jsonDrivingDistanceToTarget.distanceInMiles;
+  targetHeaderEl.appendChild(targetMilesEl);
+  var targetAvgDriveTimeEl = document.createElement("p");
+  targetAvgDriveTimeEl.textContent = jsonDrivingDistanceToTarget.avgTimeInMinutes;
+  targetHeaderEl.appendChild(targetAvgDriveTimeEl);
+  var targetTrafficDriveTimeEl = document.createElement("p");
+  targetTrafficDriveTimeEl.textContent = jsonDrivingDistanceToTarget.trafficTimeInMinutes;
+  targetHeaderEl.appendChild(targetTrafficDriveTimeEl);
 
   /*
    * Walmart Data
@@ -43,9 +53,33 @@ var populateLocationElements = async function (_inputAddress) {
   console.log("DRIVE TO WALMART LOCATION");
   console.log(jsonDrivingDistanceToWalmart);
   console.log("*********************************");
+  var walmartHeaderEl = document.querySelector("#walmart-info");
+  var walmartAddressEl = document.createElement("p");
+  walmartAddressEl.textContent = jsonWalmartLocation.address + ", " + jsonWalmartLocation.city + " " + jsonWalmartLocation.state + ", " + jsonWalmartLocation.zipCode;
+  walmartHeaderEl.appendChild(walmartAddressEl);
+  var walmartMilesEl = document.createElement("p");
+  walmartMilesEl.textContent = jsonDrivingDistanceToWalmart.distanceInMiles;
+  walmartHeaderEl.appendChild(walmartMilesEl);
+  var walmartAvgDriveTimeEl = document.createElement("p");
+  walmartAvgDriveTimeEl.textContent = jsonDrivingDistanceToWalmart.avgTimeInMinutes;
+  walmartHeaderEl.appendChild(walmartAvgDriveTimeEl);
+  var walmartTrafficDriveTimeEl = document.createElement("p");
+  walmartTrafficDriveTimeEl.textContent = jsonDrivingDistanceToWalmart.trafficTimeInMinutes;
+  walmartHeaderEl.appendChild(walmartTrafficDriveTimeEl);
+
 
   return jsonTargetLocation.location_id; // need for target item lookup
 };
+
+var getshopperaddr = async function(){
+  var shopperAddrEl = document.getElementById("address-input");
+  var addr = shopperAddrEl.value;
+  var location_id = await populateLocationElements (addr);
+
+}
+//tryit(shopperAddr, itemDesc);
+var enterBtn = document.getElementById("enter-button");
+enterBtn.addEventListener("click",getshopperaddr);
 
 var populateItemElements = async function (location_id, _itemDesc) {
 
@@ -77,4 +111,3 @@ var tryit = async function (shopperAddr, itemDesc) {
   populateItemElements(target_location_id, itemDesc);
 };
 
-tryit(shopperAddr, itemDesc);
