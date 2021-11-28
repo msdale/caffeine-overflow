@@ -48,10 +48,10 @@
             <p class="subtitle is-4">Please enter your address to find store locations closest to you:</p>
             <div class="columns">
                 <div class="column">
-                    <input class="input is-info" type="text" placeholder="Address: City, State & Zip Code"/>
+                    <input id="address-input" class="input is-info" type="text" placeholder="Address: City, State & Zip Code"/>
                 </div>
                 <div class="column">
-                    <button class="button is-info">Enter</button>
+                    <button id="enter-button" class="button is-info">Enter</button>
                 </div>
             </div>
         </section>
@@ -63,10 +63,10 @@
             <p class="subtitle is-4">Enter the item name or description here to search:</p>
             <div class="columns">
                 <div class="column">
-                    <input class="input is-info" type="text" placeholder="Enter Item Name or Brief Decription Here"/>
+                    <input id="item-desc" class="input is-info" type="text" placeholder="Enter Item Name or Brief Decription Here"/>
                 </div>
                 <div class="column">
-                    <button class="button is-info">Search</button>
+                    <button id="search-button" class="button is-info">Search</button>
                 </div>
             </div>
         </section>    
@@ -80,51 +80,53 @@
                 <div class="column">
                     <!--CARD 1 SEARCH RESULTS: TARGET-->
                     <div class="card">
-                        <header class="card-header">
+                        <header id="target-info" class="card-header">
                             <p class="card-header-title">
                                 Target
                             </p>
                         </header>
                         <div class="media-content">
-                            <p class="title is-4">Item Name</p>
+                            <p class="title is-4">Item List</p>
                         </div>
                         <div class="card-image">
-                            <figure class="image is-1by1">
+                          <ul id="target-items"></ul>
+                            <!--<figure class="image is-1by1">
                                 <img src="https://bulma.io/images/placeholders/480x480.png" alt="Placeholder image">
-                            </figure>
+                            </figure>-->
                         </div>
                         <div class="media-content">
-                            <p class="title is-4">Item Description</p>
-                            <h3 class="title is-3">Price</h3>
+                            <!--<p class="title is-4">Item Description</p>-->
+                            <!--<h3 class="title is-3">Price</h3>-->
                         </div>
-                        <footer class="card-footer">
+                        <!--<footer class="card-footer">
                             <a href="#" class="card-footer-item">Add to List</a>
-                        </footer>
+                        </footer>-->
                     </div>
                 </div>
                 <div class="column">
                     <!--CARD 2 SEARCH RESULTS: WALMART-->
                     <div class="card">
-                        <header class="card-header">
+                        <header id="walmart-info" class="card-header">
                             <p class="card-header-title">
                                 Walmart
                             </p>
                         </header>
                         <div class="media-content">
-                            <p class="title is-4">Item Name</p>
+                            <p class="title is-4">Item List</p>
                         </div>
                         <div class="card-image">
-                            <figure class="image is-1by1">
+                          <ul id="walmart-items"></ul>
+                            <!--<figure class="image is-1by1">
                                 <img src="https://bulma.io/images/placeholders/480x480.png" alt="Placeholder image">
-                            </figure>
+                            </figure>-->
                         </div>
                         <div class="media-content">
-                            <p class="title is-4">Item Description</p>
-                            <h3 class="title is-3">Price</h3>
+                            <!--<p class="title is-4">Item Description</p>-->
+                            <!--<h3 class="title is-3">Price</h3>-->
                         </div>
-                        <footer class="card-footer">
+                        <!--<footer class="card-footer">
                             <a href="#" class="card-footer-item">Add to List</a>
-                        </footer>
+                        </footer>-->
                     </div>
                 </div>
             </div>
@@ -134,7 +136,9 @@
         <!--View Shopping List-->
         <section class="section">
             <h2 class="title is-2">View Shopping List</h2>
-            <button class="button is-info">Click Here to View List</button>
+            <button id="view-list" class="button is-info">Click Here to View List</button>
+            <ul id="target-shopping-list"></ul>
+            <ul id="walmart-shopping-list"></ul>
         </section>
         <!--End Shopping List-->
     </main>
@@ -149,5 +153,7 @@
     <!-- link JS File -->
     <!-- <script src=""></script> -->
     <script src="./assets/js/dataAPI.js"></script>
+    <script src="./assets/js/dataHandler.js"></script>
 </body>
 </html>
+
