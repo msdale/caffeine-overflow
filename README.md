@@ -1,5 +1,5 @@
 # **Group Project #1: Pricemart**
-<img src="./images/Caffeine Overflow Logo" alt="coffee cup"/>
+<img src="https://github.com/msdale/caffeine-overflow/tree/main/assets/images" alt="coffee cup"/>
 
 ## Website Link
 https://msdale.github.io/caffeine-overflow/
@@ -35,7 +35,9 @@ https://walmart.p.rapidapi.com/products/v2/list?query=
 >8. From this view, the user has the option to "Delete individual item", "Delete List", "Print List", "Email List" or to "Return to Homepage" to continue comparing and adding additional items.
 
 ## Images
-<!-- <img src="" alt=""/> -->
+<img src="https://github.com/msdale/caffeine-overflow/blob/feature/alexis/assets/images/01-homepage%20view.jpg" alt="homepage"/>
+<img src="https://github.com/msdale/caffeine-overflow/blob/feature/alexis/assets/images/02-search%20function%20and%20display.jpg" alt="search and address return"/>
+
 ## Contributors: 
 Alexis El Amrani, Mark Dale, Patricia Manecci, Sebastian Casado and Phillip MacDonald 
 # Group Name:  caffeine-overflow
