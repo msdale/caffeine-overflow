@@ -35,3 +35,23 @@ p {
 .hero p {
     font-weight: bold;
 }
+
+#results {
+    background-color: rgb(49,114,220);
+}
+
+#results h2 {
+    color: white;
+}
+
+#results h3 {
+    color: white;
+}
+
+#results h4 {
+    color: black;
+}
+
+#results p {
+    color: black;
+}

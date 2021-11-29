@@ -19,7 +19,7 @@
 </head>
 <body>
     <!--Header - Bulma Hero Layout-->
-    <section class="hero is-info is-medium">
+    <section class="hero is-info is-small">
         <div class="hero-body" style="background: url('./assets/images/viki-mohamad-tWXH_zGJrPo-unsplash.jpg') no-repeat right; background-size: contain;">
             <div class="container is-widescreen columns">
                 <div class="column is-2">
@@ -48,10 +48,10 @@
             <p class="subtitle is-4">Please enter your address to find store locations closest to you:</p>
             <div class="columns">
                 <div class="column">
-                    <input class="input is-info" type="text" placeholder="Address: City, State & Zip Code"/>
+                    <input id="address-input" class="input is-info" type="text" placeholder="Address: City, State & Zip Code"/>
                 </div>
                 <div class="column">
-                    <button class="button is-info">Enter</button>
+                    <button id="enter-button" class="button is-info">Enter</button>
                 </div>
             </div>
         </section>
@@ -63,68 +63,38 @@
             <p class="subtitle is-4">Enter the item name or description here to search:</p>
             <div class="columns">
                 <div class="column">
-                    <input class="input is-info" type="text" placeholder="Enter Item Name or Brief Decription Here"/>
+                    <input id="item-desc" class="input is-info" type="text" placeholder="Enter Item Name or Brief Decription Here"/>
                 </div>
                 <div class="column">
-                    <button class="button is-info">Search</button>
+                    <button id="search-button" class="button is-info">Search</button>
                 </div>
             </div>
         </section>    
         <!--End Item Search-->
 
         <!--Results Displayed Using Cards-->
-        <section class="section">
+        <section class="section has-background-info" id="results">
             <h2 class="title is-2">Results</h2>
             <!-- connection to JS file to bring in results -->
             <div class="columns">
                 <div class="column">
-                    <!--CARD 1 SEARCH RESULTS: TARGET-->
-                    <div class="card">
-                        <header class="card-header">
-                            <p class="card-header-title">
-                                Target
-                            </p>
-                        </header>
-                        <div class="media-content">
-                            <p class="title is-4">Item Name</p>
+                    <!--BOX 1 SEARCH RESULTS: TARGET-->
+                    <h3 class="title is-3">Target:</h3>
+                    <div class="box">
+                        <h3 id="target-info" class="title is-4"></h3>
+                        <div class="box">
+                            <ul id="target-items"></ul>
                         </div>
-                        <div class="card-image">
-                            <figure class="image is-1by1">
-                                <img src="https://bulma.io/images/placeholders/480x480.png" alt="Placeholder image">
-                            </figure>
-                        </div>
-                        <div class="media-content">
-                            <p class="title is-4">Item Description</p>
-                            <h3 class="title is-3">Price</h3>
-                        </div>
-                        <footer class="card-footer">
-                            <a href="#" class="card-footer-item">Add to List</a>
-                        </footer>
                     </div>
                 </div>
                 <div class="column">
-                    <!--CARD 2 SEARCH RESULTS: WALMART-->
-                    <div class="card">
-                        <header class="card-header">
-                            <p class="card-header-title">
-                                Walmart
-                            </p>
-                        </header>
-                        <div class="media-content">
-                            <p class="title is-4">Item Name</p>
+                    <!--BOX 2 SEARCH RESULTS: WALMART-->
+                    <h3 class="title is-3">Walmart:</h3>
+                    <div class="box">
+                        <h3 id="walmart-info" class="title is-4"></h3>
+                        <div class="box">
+                            <ul id="walmart-items"></ul>
                         </div>
-                        <div class="card-image">
-                            <figure class="image is-1by1">
-                                <img src="https://bulma.io/images/placeholders/480x480.png" alt="Placeholder image">
-                            </figure>
-                        </div>
-                        <div class="media-content">
-                            <p class="title is-4">Item Description</p>
-                            <h3 class="title is-3">Price</h3>
-                        </div>
-                        <footer class="card-footer">
-                            <a href="#" class="card-footer-item">Add to List</a>
-                        </footer>
                     </div>
                 </div>
             </div>
@@ -132,9 +102,13 @@
         <!--End Results Section-->
 
         <!--View Shopping List-->
-        <section class="section">
-            <h2 class="title is-2">View Shopping List</h2>
-            <button class="button is-info">Click Here to View List</button>
+        <section class="section has-text-centered">
+            <div class="title is-2">
+            <a href="./shopping-list.html"><h2 class="has-text-info">View Shopping List</h2></a>
+            <!-- <button id="view-list" class="button is-info">Click Here to View List</button> -->
+            </div>
+            <ul id="target-shopping-list"></ul>
+            <ul id="walmart-shopping-list"></ul>
         </section>
         <!--End Shopping List-->
     </main>
@@ -148,5 +122,8 @@
     <!--End Footer-->
     <!-- link JS File -->
     <!-- <script src=""></script> -->
+    <script src="./assets/js/dataAPI.js"></script>
+    <script src="./assets/js/dataHandler.js"></script>
 </body>
 </html>
+

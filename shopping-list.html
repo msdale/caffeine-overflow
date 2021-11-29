@@ -20,7 +20,7 @@
 
 <body>
     <!--Header - Bulma Hero Layout-->
-    <section class="hero is-info is-medium">
+    <section class="hero is-info is-small">
         <div class="hero-body" style="background: url('./assets/images/viki-mohamad-tWXH_zGJrPo-unsplash.jpg') no-repeat right; background-size: contain;">
             <div class="container is-widescreen columns">
                 <div class="column is-2">
@@ -40,37 +40,61 @@
         </div>
     </section>
     <!--End Header-->
-
-    
-    <!-- left column, Retailer 1 shopping list -->
-        <!-- format width of left column -->
-        <div>
-            <!-- format card? -->
-            <div>
-                <h3>Target</h3>
-                <!-- create container for list to post to -->
-                <div>
-                    <!-- button to delete individual item off list, maybe hangs to the right of the item's title -->
-                    <button type="button"><i class="fas fa-trash"></i></button>
+    <section class="is-large">
+    <section class="columns">
+    <!-- Reatiler List -->
+        <!-- Bulma Panel -->
+        <div class="column is-3">
+            <div class="panel is-info">
+                <h3 class="panel-heading">
+                Saved Shopping Lists:
+                </h3>
+                <p class="panel-block">
+                Click on each store name below to view your shopping list!
+                </p>
+                <div class="panel-block">
+                <input class="input" type="text" placeholder="Search">
+                </div>
+                <a class="panel-block is-active">
+                    <span class="panel-icon">
+                    <i class="fas fa-book" aria-hidden="true"></i>
+                    </span>
+                    Target
+                </a>
+                <a class="panel-block">
+                    <span class="panel-icon">
+                    <i class="fas fa-book" aria-hidden="true"></i>
+                    </span>
+                    Walmart
+                </a>
+            </div>
+        </div>
+        <!-- List Results -->
+        <div class="column is-9">
+            <div class="box">
+                <h2 class="title is-2">Target Shopping List:</h2>
+                <div class="box">
+                    <ul class="title is-4 target-viewlist">Shopping List</ul>
+                        <li>Sample Item 1  <button type="button"><i class="fas fa-trash"></i></button></li>
+                        <li>Sample Item 2  <button type="button"><i class="fas fa-trash"></i></button></li>
+                </br>
                     <!-- maybe have warning pop when delete entire list is clicked? -->
-                    <button type="submit" class="btn">Delete List</button>
+                    <button type="submit" class="button is-primary">Print List</button>
+                    <button type="submit" class="button is-info">Email List</button>
+                    <button type="submit" class="button is-danger">Delete List</button>
                 </div>
             </div>
         </div>
-
-        <!-- right column, Retailer 2 -->
-        <!-- format width of right column -->
-        <div>
-            <!-- format card? -->
-            <div>
-                <h3>Walmart</h3>
-                <!-- create container for list to post to -->
-                    <!-- button to delete individual item off list, maybe hangs to the right of the item's title -->
-                    <button type="button"><i class="fas fa-trash"></i></button>
-                    <!-- maybe have warning pop when delete entire list is clicked? -->
-                    <button type="submit" class="btn">Delete List</button>
+    </section>
+</section>
+        
+    <!--return to home page-->
+    <section>
+        <div class="title is-2 has-text-centered">
+            <a href="./index.html">Return to Shopping!</a>
+            <!-- <button id="view-list" class="button is-info">Click Here to View List</button> -->
             </div>
-        </div>
+        </section>   
 
     <!--Footer - Bulma Footer Layout-->
     <footer class="footer">
