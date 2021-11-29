@@ -1,15 +1,9 @@
 //js for shopping list page for release 2.0
 
-// var targetList = "Target: []";
+//Create function so that when a retailer is clicked on a list is formed with the items they added to it for that retailer only. 
 
-// //show shopping list for target
-// var targetViewList = function () {
-//     var targetView = JSON.parse(window.localStorage.getItem("highscores")) || [];
-//         if(targetView !== null) {
-//             targetList = targetView;
-//         };
-// }
+//Create function to delete indivual items off list
 
-//click retailer to show shopping list
-// $(document).on("click", ".target", function name that creates this call);
-// $(document).on("click", ".walmart", function name that creates this call);
+//Create function to delete entire list, ensure confirmation is required prior to deletion
+
+//Create functions to print or email list

@@ -1,3 +1,4 @@
+//Global Variables
 var shopperAddr = "";
 var itemDesc = "";
 var shoppingList = {"Target": [], "Walmart": []};
@@ -12,12 +13,13 @@ var removeAllChildNodes = function (parent) {
   }
 }
 
+// Address, Distance and Store Location function
 var populateLocationElements = async function (_inputAddress) {
   var addrArray = _inputAddress.split(" ");
   var zipCode = addrArray[addrArray.length - 1];
 
   /*
-   * Target Data
+   * Retailer: Target Data
    */
   var jsonTargetLocation = await targetLocator(zipCode, "20");
 
@@ -48,7 +50,7 @@ var populateLocationElements = async function (_inputAddress) {
   targetHeaderEl.appendChild(targetTrafficDriveTimeEl);
 
   /*
-   * Walmart Data
+   * Retailer: Walmart Data
    */
   var jsonWalmartLocation = await walmartLocator(zipCode);
 
@@ -250,6 +252,7 @@ walmartItemsEl.addEventListener("click", saveWalmartItem);
 var viewListBtnEl = document.getElementById("view-list");
 viewListBtnEl.addEventListener("click", viewShoppingList);
 
+//Release 2.0 add "Enter Key" functionality
 //check if enter key hit instead of click
 // $("#item-desc").keypress(function(event) {
 //   if (event.which === 13) {
