@@ -34,7 +34,7 @@ var populateLocationElements = async function (_inputAddress) {
   console.log("*********************************");
   var targetHeaderEl = document.querySelector("#target-info");
   removeAllChildNodes(targetHeaderEl);
-  var targetAddressEl = document.createElement("h2");
+  var targetAddressEl = document.createElement("h4");
   targetAddressEl.textContent = "Store Address: " + jsonTargetLocation.address + ", " + jsonTargetLocation.city + " " + jsonTargetLocation.state + ", " + jsonTargetLocation.zipCode;
   targetHeaderEl.appendChild(targetAddressEl);
   var targetMilesEl = document.createElement("p");
@@ -66,7 +66,7 @@ var populateLocationElements = async function (_inputAddress) {
   console.log("*********************************");
   var walmartHeaderEl = document.querySelector("#walmart-info");
   removeAllChildNodes(walmartHeaderEl);
-  var walmartAddressEl = document.createElement("h2");
+  var walmartAddressEl = document.createElement("h4");
   walmartAddressEl.textContent = "Store Address: " + jsonWalmartLocation.address + ", " + jsonWalmartLocation.city + " " + jsonWalmartLocation.state + ", " + jsonWalmartLocation.zipCode;
   walmartHeaderEl.appendChild(walmartAddressEl);
   var walmartMilesEl = document.createElement("p");
@@ -118,7 +118,7 @@ var populateItemElements = async function (location_id, _itemDesc) {
     itemEl.appendChild(itemDescEl);
 
     // price
-    var itemPriceEl = document.createElement("h1");
+    var itemPriceEl = document.createElement("h4");
     itemPriceEl.textContent = jsonTargetItemList.items[i].formattedPrice;
     itemEl.appendChild(itemPriceEl);
 
@@ -155,7 +155,7 @@ var populateItemElements = async function (location_id, _itemDesc) {
     itemEl.appendChild(itemDescEl);
 
     // price
-    var itemPriceEl = document.createElement("h1");
+    var itemPriceEl = document.createElement("h4");
     itemPriceEl.textContent = jsonWalmartItemList.items[i].foramattedPrice;
     itemEl.appendChild(itemPriceEl);
 
