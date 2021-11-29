@@ -1,5 +1,5 @@
 # **Group Project #1: Pricemart**
-<img src="https://github.com/msdale/caffeine-overflow/tree/main/assets/images" alt="coffee cup"/>
+<img src="https://github.com/msdale/caffeine-overflow/blob/feature/alexis/assets/images/Caffine%20Overflow%20Logo.png" alt="coffee cup"/>
 
 ## Website Link
 https://msdale.github.io/caffeine-overflow/
@@ -37,6 +37,9 @@ https://walmart.p.rapidapi.com/products/v2/list?query=
 ## Images
 <img src="https://github.com/msdale/caffeine-overflow/blob/feature/alexis/assets/images/01-homepage%20view.jpg" alt="homepage"/>
 <img src="https://github.com/msdale/caffeine-overflow/blob/feature/alexis/assets/images/02-search%20function%20and%20display.jpg" alt="search and address return"/>
+<img src="https://github.com/msdale/caffeine-overflow/blob/feature/alexis/assets/images/03-%20search%20item%20displayed.jpg" alt="search results displayed"/>
+<img src="https://github.com/msdale/caffeine-overflow/blob/feature/alexis/assets/images/04-link%20to%20shopping%20list.jpg" alt="link to shopping list"/>
+<img src="https://github.com/msdale/caffeine-overflow/blob/feature/alexis/assets/images/05-view%20of%20shopping%20list%20page.jpg" alt="shopping list"/>
 
 ## Contributors: 
 Alexis El Amrani, Mark Dale, Patricia Manecci, Sebastian Casado and Phillip MacDonald 
