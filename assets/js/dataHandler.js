@@ -1,6 +1,17 @@
 //Global Variables
-var shopperAddr = "";
-var itemDesc = "";
+var shopperAddr = localStorage.getItem("shopperAddr");
+if (shopperAddr) {
+  var inputAddrEl = document.getElementById("address-input");
+  inputAddrEl.value = shopperAddr;
+}
+
+var itemDesc = localStorage.getItem("itemDesc");
+if (itemDesc) {
+  var itemDescEl = document.getElementById("item-desc");
+  //itemDescEl.value = itemDesc;
+  itemDescEl.value = "";
+}
+
 var shoppingList = {"Target": [], "Walmart": []};
 localStorage.clear();
 localStorage.setItem("shoppingList", JSON.stringify(shoppingList));
@@ -72,7 +83,7 @@ var populateLocationElements = async function (_inputAddress) {
   walmartAddressEl.textContent = "Store Address: " + jsonWalmartLocation.address + ", " + jsonWalmartLocation.city + " " + jsonWalmartLocation.state + ", " + jsonWalmartLocation.zipCode;
   walmartHeaderEl.appendChild(walmartAddressEl);
   var walmartMilesEl = document.createElement("p");
-  walmartMilesEl.textContent = "Distance to Store: " +  jsonDrivingDistanceToWalmart.distanceInMiles + " Miles";
+  walmartMilesEl.textContent = "Distance to Store: " + jsonDrivingDistanceToWalmart.distanceInMiles + " Miles";
   walmartHeaderEl.appendChild(walmartMilesEl);
   var walmartAvgDriveTimeEl = document.createElement("p");
   walmartAvgDriveTimeEl.textContent = "Average Time: " + jsonDrivingDistanceToWalmart.avgTimeInMinutes + " Min";
@@ -90,8 +101,9 @@ var getshopperaddr = async function (event) {
   // prevent page from refreshing
   event.preventDefault();
   var shopperAddrEl = document.getElementById("address-input");
-  var addr = shopperAddrEl.value;
-  target_location_id = await populateLocationElements(addr);
+  shopperAddr = shopperAddrEl.value;
+  localStorage.setItem("shopperAddr", shopperAddr)
+  target_location_id = await populateLocationElements(shopperAddr);
 };
 
 var enterBtnEl = document.getElementById("enter-button");
@@ -178,6 +190,7 @@ var listItems = async function (event) {
 
   var itemDescEl = document.getElementById("item-desc");
   var itemDesc = itemDescEl.value;
+  localStorage.setItem("itemDesc", itemDesc);
   await populateItemElements(target_location_id, itemDesc);
 };
 
@@ -193,7 +206,7 @@ var saveTargetItem = function (event) {
   console.log(targetItemListEl);
   var targetItemsEl = targetItemListEl.getElementsByTagName("li");
   shoppingList = JSON.parse(localStorage.getItem("shoppingList"));
-  shoppingList.Target.push({"description": targetItemsEl[index].children[1].textContent, "formattedPrice": targetItemsEl[index].children[2].textContent});
+  shoppingList.Target.push({ "description": targetItemsEl[index].children[1].textContent, "formattedPrice": targetItemsEl[index].children[2].textContent });
   console.log(shoppingList);
   console.log(targetItemsEl[index].children[1].textContent);
   console.log(targetItemsEl[index].children[2].textContent);
@@ -208,14 +221,14 @@ var saveWalmartItem = function (event) {
   console.log(walmartItemListEl);
   var walmartItemsEl = walmartItemListEl.getElementsByTagName("li");
   shoppingList = JSON.parse(localStorage.getItem("shoppingList"));
-  shoppingList.Walmart.push({"description": walmartItemsEl[index].children[1].textContent, "formattedPrice": walmartItemsEl[index].children[2].textContent});
+  shoppingList.Walmart.push({ "description": walmartItemsEl[index].children[1].textContent, "formattedPrice": walmartItemsEl[index].children[2].textContent });
   console.log(shoppingList);
   console.log(walmartItemsEl[index].children[1].textContent);
   console.log(walmartItemsEl[index].children[2].textContent);
   localStorage.setItem("shoppingList", JSON.stringify(shoppingList));
 };
 
-var viewShoppingList = function(event) {
+var viewShoppingList = function (event) {
   // prevent page from refreshing
   event.preventDefault();
   shoppingList = JSON.parse(localStorage.getItem("shoppingList"));
@@ -228,7 +241,7 @@ var viewShoppingList = function(event) {
   targetShoppingListEl.appendChild(targetShoppingListTitleEl);
   for (var i = 0; i < shoppingList.Target.length; i++) {
     var itemEl = document.createElement("li");
-    itemEl.textContent = shoppingList.Target[i].description + " --- " + shoppingList.Target[i].formattedPrice;  
+    itemEl.textContent = shoppingList.Target[i].description + " --- " + shoppingList.Target[i].formattedPrice;
     targetShoppingListEl.appendChild(itemEl);
   }
 
@@ -240,7 +253,7 @@ var viewShoppingList = function(event) {
   walmartShoppingListEl.appendChild(walmartShoppingListTitleEl);
   for (var i = 0; i < shoppingList.Walmart.length; i++) {
     var itemEl = document.createElement("li");
-    itemEl.textContent = shoppingList.Walmart[i].description + " --- " + shoppingList.Walmart[i].formattedPrice;  
+    itemEl.textContent = shoppingList.Walmart[i].description + " --- " + shoppingList.Walmart[i].formattedPrice;
     walmartShoppingListEl.appendChild(itemEl);
   }
 }
@@ -249,8 +262,8 @@ var targetItemsEl = document.getElementById("target-items");
 targetItemsEl.addEventListener("click", saveTargetItem);
 var walmartItemsEl = document.getElementById("walmart-items");
 walmartItemsEl.addEventListener("click", saveWalmartItem);
-var viewListBtnEl = document.getElementById("view-list");
-viewListBtnEl.addEventListener("click", viewShoppingList);
+//var viewListBtnEl = document.getElementById("view-list");
+//viewListBtnEl.addEventListener("click", viewShoppingList);
 
 //Release 2.0 add "Enter Key" functionality
 //check if enter key hit instead of click
