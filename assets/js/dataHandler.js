@@ -1,18 +1,8 @@
 //Global Variables
 var shopperAddr = localStorage.getItem("shopperAddr");
-if (shopperAddr) {
-  var inputAddrEl = document.getElementById("address-input");
-  inputAddrEl.value = shopperAddr;
-}
-
+var targetLocationId = localStorage.getItem("targetLocationId");
 var itemDesc = localStorage.getItem("itemDesc");
-if (itemDesc) {
-  var itemDescEl = document.getElementById("item-desc");
-  //itemDescEl.value = itemDesc;
-  itemDescEl.value = "";
-}
-
-var shoppingList = {"Target": [], "Walmart": []};
+var shoppingList = { "Target": [], "Walmart": [] };
 localStorage.clear();
 localStorage.setItem("shoppingList", JSON.stringify(shoppingList));
 
@@ -96,19 +86,6 @@ var populateLocationElements = async function (_inputAddress) {
   return jsonTargetLocation.location_id; // need for target item lookup
 };
 
-var target_location_id = "";
-var getshopperaddr = async function (event) {
-  // prevent page from refreshing
-  event.preventDefault();
-  var shopperAddrEl = document.getElementById("address-input");
-  shopperAddr = shopperAddrEl.value;
-  localStorage.setItem("shopperAddr", shopperAddr)
-  target_location_id = await populateLocationElements(shopperAddr);
-};
-
-var enterBtnEl = document.getElementById("enter-button");
-enterBtnEl.addEventListener("click", getshopperaddr);
-
 var populateItemElements = async function (location_id, _itemDesc) {
   // Target Data
   var jsonTargetItemList = await targetProductLocator(location_id, _itemDesc);
@@ -184,6 +161,45 @@ var populateItemElements = async function (location_id, _itemDesc) {
   console.log(walmartItemsEl);
 };
 
+var resetShopperAddr = async function () {
+  var inputAddrEl = document.getElementById("address-input");
+  inputAddrEl.value = shopperAddr;
+  var targetLocationId = await populateLocationElements(shopperAddr);
+  localStorage.setItem("targetLocationId", targetLocationId);
+  localStorage.setItem("shopperAddr", shopperAddr);
+};
+var resetListItems = async function () {
+  var itemDescEl = document.getElementById("item-desc");
+  itemDescEl.value = itemDesc;
+  localStorage.setItem("itemDesc", itemDesc);
+  await populateItemElements(targetLocationId, itemDesc);
+};
+
+var resetPage = async function () {
+  if (shopperAddr) {
+    await resetShopperAddr();
+    if (itemDesc && targetLocationId) {
+      await resetListItems();
+    }
+  }
+};
+
+resetPage();
+
+var getShopperAddr = async function (event) {
+  // prevent page from refreshing
+  event.preventDefault();
+  var shopperAddrEl = document.getElementById("address-input");
+  shopperAddr = shopperAddrEl.value;
+  localStorage.setItem("shopperAddr", shopperAddr)
+  var targetLocationId = await populateLocationElements(shopperAddr);
+  localStorage.setItem("targetLocationId", targetLocationId);
+};
+
+var enterBtnEl = document.getElementById("enter-button");
+enterBtnEl.addEventListener("click", getShopperAddr);
+
+
 var listItems = async function (event) {
   // prevent page from refreshing
   event.preventDefault();
@@ -191,7 +207,8 @@ var listItems = async function (event) {
   var itemDescEl = document.getElementById("item-desc");
   var itemDesc = itemDescEl.value;
   localStorage.setItem("itemDesc", itemDesc);
-  await populateItemElements(target_location_id, itemDesc);
+  var targetLocationId = localStorage.getItem("targetLocationId");
+  await populateItemElements(targetLocationId, itemDesc);
 };
 
 var searchBtnEl = document.getElementById("search-button");
@@ -262,20 +279,3 @@ var targetItemsEl = document.getElementById("target-items");
 targetItemsEl.addEventListener("click", saveTargetItem);
 var walmartItemsEl = document.getElementById("walmart-items");
 walmartItemsEl.addEventListener("click", saveWalmartItem);
-//var viewListBtnEl = document.getElementById("view-list");
-//viewListBtnEl.addEventListener("click", viewShoppingList);
-
-//Release 2.0 add "Enter Key" functionality
-//check if enter key hit instead of click
-// $("#item-desc").keypress(function(event) {
-//   if (event.which === 13) {
-//       $("#search-button").click();
-//   }
-// })
-
-
-//var tryit = async function (shopperAddr, itemDesc) {
-//  var target_location_id = await populateLocationElements(shopperAddr);
-//  populateItemElements(target_location_id, itemDesc);
-//};
-
