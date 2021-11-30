@@ -42,7 +42,7 @@
     <!--End Header-->
     <section class="is-large">
     <section class="columns">
-    <!-- Reatiler List -->
+    <!-- Retailer List -->
         <!-- Bulma Panel -->
         <div class="column is-3">
             <div class="panel is-info">
@@ -53,6 +53,7 @@
                 Click on each store name below to view your shopping list!
                 </p>
                 <div class="panel-block">
+                <!-- Release 2.0 added retailers, create search for quicker finds for users with multiple retailers -->
                 <input class="input" type="text" placeholder="Search">
                 </div>
                 <a class="panel-block is-active">
@@ -70,15 +71,17 @@
             </div>
         </div>
         <!-- List Results -->
+        <!-- Release 2.0 shopping list created with option to delete individual items -->
         <div class="column is-9">
             <div class="box">
                 <h2 class="title is-2">Target Shopping List:</h2>
                 <div class="box">
                     <ul class="title is-4 target-viewlist">Shopping List</ul>
+                    <!-- Sample view of Release 2.0 -->
                         <li>Sample Item 1  <button type="button"><i class="fas fa-trash"></i></button></li>
                         <li>Sample Item 2  <button type="button"><i class="fas fa-trash"></i></button></li>
                 </br>
-                    <!-- maybe have warning pop when delete entire list is clicked? -->
+                    <!-- Release 2.0 Print, Email and Delete entire list options with warning pop when delete entire list is clicked? -->
                     <button type="submit" class="button is-primary">Print List</button>
                     <button type="submit" class="button is-info">Email List</button>
                     <button type="submit" class="button is-danger">Delete List</button>
@@ -92,9 +95,8 @@
     <section>
         <div class="title is-2 has-text-centered">
             <a href="./index.html">Return to Shopping!</a>
-            <!-- <button id="view-list" class="button is-info">Click Here to View List</button> -->
-            </div>
-        </section>   
+        </div>
+    </section>   
 
     <!--Footer - Bulma Footer Layout-->
     <footer class="footer">
@@ -104,6 +106,8 @@
     </footer>
     <!--End Footer-->
 
-    <!-- link JS file for Shopping List index -->
+    <!-- JS files for Shopping List index for Release 2.0 -->
+    <!-- <script src="./assets/js/dataHandler.js"></script> -->
+    <!-- <script src="assets/js/list.js"></script> -->
 </body>
 </html>
