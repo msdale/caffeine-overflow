@@ -1,10 +1,14 @@
 //Global Variables
-var shopperAddr = localStorage.getItem("shopperAddr");
-var targetLocationId = localStorage.getItem("targetLocationId");
-var itemDesc = localStorage.getItem("itemDesc");
-var shoppingList = { "Target": [], "Walmart": [] };
-localStorage.clear();
-localStorage.setItem("shoppingList", JSON.stringify(shoppingList));
+var shopperAddr = sessionStorage.getItem("shopperAddr");
+var targetLocationId = sessionStorage.getItem("targetLocationId");
+var itemDesc = sessionStorage.getItem("itemDesc");
+
+var shoppingList = JSON.parse(sessionStorage.getItem("shoppingList"));
+if (!shoppingList || !shoppingList.Target || !shoppingList.Walmart) {
+  var shoppingList = { "Target": [], "Walmart": [] };
+}
+sessionStorage.clear();
+sessionStorage.setItem("shoppingList", JSON.stringify(shoppingList));
 
 var removeAllChildNodes = function (parent) {
   if (parent) {
@@ -165,13 +169,13 @@ var resetShopperAddr = async function () {
   var inputAddrEl = document.getElementById("address-input");
   inputAddrEl.value = shopperAddr;
   var targetLocationId = await populateLocationElements(shopperAddr);
-  localStorage.setItem("targetLocationId", targetLocationId);
-  localStorage.setItem("shopperAddr", shopperAddr);
+  sessionStorage.setItem("targetLocationId", targetLocationId);
+  sessionStorage.setItem("shopperAddr", shopperAddr);
 };
 var resetListItems = async function () {
   var itemDescEl = document.getElementById("item-desc");
   itemDescEl.value = itemDesc;
-  localStorage.setItem("itemDesc", itemDesc);
+  sessionStorage.setItem("itemDesc", itemDesc);
   await populateItemElements(targetLocationId, itemDesc);
 };
 
@@ -191,9 +195,9 @@ var getShopperAddr = async function (event) {
   event.preventDefault();
   var shopperAddrEl = document.getElementById("address-input");
   shopperAddr = shopperAddrEl.value;
-  localStorage.setItem("shopperAddr", shopperAddr)
+  sessionStorage.setItem("shopperAddr", shopperAddr)
   var targetLocationId = await populateLocationElements(shopperAddr);
-  localStorage.setItem("targetLocationId", targetLocationId);
+  sessionStorage.setItem("targetLocationId", targetLocationId);
 };
 
 var enterBtnEl = document.getElementById("enter-button");
@@ -206,8 +210,8 @@ var listItems = async function (event) {
 
   var itemDescEl = document.getElementById("item-desc");
   var itemDesc = itemDescEl.value;
-  localStorage.setItem("itemDesc", itemDesc);
-  var targetLocationId = localStorage.getItem("targetLocationId");
+  sessionStorage.setItem("itemDesc", itemDesc);
+  var targetLocationId = sessionStorage.getItem("targetLocationId");
   await populateItemElements(targetLocationId, itemDesc);
 };
 
@@ -222,12 +226,12 @@ var saveTargetItem = function (event) {
   var targetItemListEl = document.querySelector("#target-items");
   console.log(targetItemListEl);
   var targetItemsEl = targetItemListEl.getElementsByTagName("li");
-  shoppingList = JSON.parse(localStorage.getItem("shoppingList"));
+  shoppingList = JSON.parse(sessionStorage.getItem("shoppingList"));
   shoppingList.Target.push({ "description": targetItemsEl[index].children[1].textContent, "formattedPrice": targetItemsEl[index].children[2].textContent });
   console.log(shoppingList);
   console.log(targetItemsEl[index].children[1].textContent);
   console.log(targetItemsEl[index].children[2].textContent);
-  localStorage.setItem("shoppingList", JSON.stringify(shoppingList));
+  sessionStorage.setItem("shoppingList", JSON.stringify(shoppingList));
 };
 
 var saveWalmartItem = function (event) {
@@ -237,18 +241,18 @@ var saveWalmartItem = function (event) {
   var walmartItemListEl = document.querySelector("#walmart-items");
   console.log(walmartItemListEl);
   var walmartItemsEl = walmartItemListEl.getElementsByTagName("li");
-  shoppingList = JSON.parse(localStorage.getItem("shoppingList"));
+  shoppingList = JSON.parse(sessionStorage.getItem("shoppingList"));
   shoppingList.Walmart.push({ "description": walmartItemsEl[index].children[1].textContent, "formattedPrice": walmartItemsEl[index].children[2].textContent });
   console.log(shoppingList);
   console.log(walmartItemsEl[index].children[1].textContent);
   console.log(walmartItemsEl[index].children[2].textContent);
-  localStorage.setItem("shoppingList", JSON.stringify(shoppingList));
+  sessionStorage.setItem("shoppingList", JSON.stringify(shoppingList));
 };
 
 var viewShoppingList = function (event) {
   // prevent page from refreshing
   event.preventDefault();
-  shoppingList = JSON.parse(localStorage.getItem("shoppingList"));
+  shoppingList = JSON.parse(sessionStorage.getItem("shoppingList"));
 
   // Target Shopping List
   var targetShoppingListEl = document.getElementById("target-shopping-list");
