@@ -18,17 +18,16 @@ None
 
 ## APIs Used
 https://dev.virtualearth.net/REST/v1/Routes?waypoint.1=
-https://target-com-store-product-reviews-locations-data.p.rapidapi.com/location/search?zip=
-https://target-com-store-product-reviews-locations-data.p.rapidapi.com/product/search?store_id=
-https://walmart.p.rapidapi.com/stores/list?postalCode=
-https://walmart.p.rapidapi.com/products/v2/list?query=
+https://target-com-store-product-reviews-locations-data.p.rapidapi.com
+https://walmart.p.rapidapi.com
 
 ## How to Use
->1. Enter item user wishes to compare prices on locally; click "Submit" button or press "Enter" key.
->2. The web browser will display different retailers that carry the same product and their individual pricing for the item.
->3. A "distance" feature will also appear below each item showing the distance to that retailer from the user's location.
+>1. User to enter address of their location, and the store closest to them will populate store address, milage to that retailer from the user's input, and current traffic drive time. 
+>2. Enter item user wishes to compare prices on locally; click "Submit" button.
+>3. The web browser will display different retailers that carry the same product and their individual pricing for the item.
 >4. The User can then compare not only pricing, but distance to retailer and local traffic drive time.
->RELEASE 2.0 FEATURES BELOW (Release Date: TBD)
+
+>*RELEASE 2.0 FEATURES BELOW (Release Date: TBD)*
 >5. The User has the option to build a shopping list for each retailer, by selecting the "add item" button. This will store the item on a list dedicated to that retailer.
 >6. The User can then click a button "Show Shopping Lists" that will take them to a new page showing the various retailers they have shopping lists for.
 >7. User then clicks on the retailer they would like to view shopping list for, and the view will display the list with items to purchase from that retailer. 
