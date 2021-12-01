@@ -8,7 +8,7 @@ https://msdale.github.io/caffeine-overflow/
 https://github.com/msdale/caffeine-overflow
 
 ## Description
->A web browser ran application that compares pricing for items at local retailers, as well as shows the distance from the user to the store so that the user can take into consideration time and gas costs. User can then build shopping lists for each retailer and print or email lists for use at the store. 
+>A web browser application that compares pricing for items at local retailers, as well as shows the distance from the user to the store so that the user can take into consideration time and travel costs. User can then build shopping lists for each retailer and print or email lists for use at while shopping. 
 
 *The languages used to create this application are HTML, CSS-Bulma, JavaScript, JQuery and used two API servers.*
 
@@ -17,22 +17,22 @@ https://github.com/msdale/caffeine-overflow
 None
 
 ## APIs Used
-https://dev.virtualearth.net/REST/v1/Routes?waypoint.1=
-https://target-com-store-product-reviews-locations-data.p.rapidapi.com/location/search?zip=
-https://target-com-store-product-reviews-locations-data.p.rapidapi.com/product/search?store_id=
-https://walmart.p.rapidapi.com/stores/list?postalCode=
-https://walmart.p.rapidapi.com/products/v2/list?query=
+>* https://dev.virtualearth.net
+>* https://rapidapi.com/logicbuilder/api/target-com-store-product-reviews-locations-data
+>* https://rapidapi.com/apidojo/api/walmart
 
 ## How to Use
->1. Enter item user wishes to compare prices on locally; click "Submit" button or press "Enter" key.
->2. The web browser will display different retailers that carry the same product and their individual pricing for the item.
->3. A "distance" feature will also appear below each item showing the distance to that retailer from the user's location.
->4. The User can then compare not only pricing, but distance to retailer and local traffic drive time.
->RELEASE 2.0 FEATURES BELOW (Release Date: TBD)
->5. The User has the option to build a shopping list for each retailer, by selecting the "add item" button. This will store the item on a list dedicated to that retailer.
->6. The User can then click a button "Show Shopping Lists" that will take them to a new page showing the various retailers they have shopping lists for.
->7. User then clicks on the retailer they would like to view shopping list for, and the view will display the list with items to purchase from that retailer. 
->8. From this view, the user has the option to "Delete individual item", "Delete List", "Print List", "Email List" or to "Return to Homepage" to continue comparing and adding additional items.
+>1. User enters shopper location (at least state and zip) in the "Location" input box, then presses the associated "Enter" button.
+>2. The web browser will display the nearest retailer (Target and Walmart) address, driving distance, average drivetime and traffic-based drivetime (real-time calculation).
+>3. User enter an item description in the "Item Search" input box, then presses the associated "Search" button.
+>4. The web browser will display a list of available items under each retail store location header.
+>5. User reviews the items listed for each retailer,and decides which items and which retailer (Target or Walmart) based on availability, cost, distance and drive time.
+>* RELEASE 2.0 FEATURES BELOW (Release Date: TBD)
+>6. The User has the option to build a shopping list for each retailer by selecting the "Add To Shopping List" button associated with the item. This will store the item on a shopping list associated with named retailer.
+>7. The User can then click the text "View Shopping List" that will take them to a new page showing the retailers they have shopping lists for (initially Target and Walmart).
+>8. The user then clicks on the retailer to view associated shopping list, and the view will display the list with items to purchase from that retailer. 
+>9. From this view, the user has the option to press "trash" buttons to remove items from the list(s), and/or press "Print List" button, and/or press "Email List" button, and/or press "Delete List" button and thus persist and manage the existing shopping list.
+>10. Finally, the user can return to the main page by clicking the text "Return to Shopping".  This will return to the original page in the same state as when the user entered the "View Shopping List" page.
 
 ## Images
 
