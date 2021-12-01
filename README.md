@@ -17,9 +17,9 @@ https://github.com/msdale/caffeine-overflow
 None
 
 ## APIs Used
-https://dev.virtualearth.net
-https://rapidapi.com/logicbuilder/api/target-com-store-product-reviews-locations-data
-https://rapidapi.com/apidojo/api/walmart
+>* https://dev.virtualearth.net
+>* https://rapidapi.com/logicbuilder/api/target-com-store-product-reviews-locations-data
+>* https://rapidapi.com/apidojo/api/walmart
 
 ## How to Use
 >1. User enters shopper location (at least state and zip) in the "Location" input box, then presses the associated "Enter" button.
