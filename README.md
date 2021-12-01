@@ -27,7 +27,7 @@ None
 >3. User enter an item description in the "Item Search" input box, then presses the associated "Search" button.
 >4. The web browser will display a list of available items under each retail store location header.
 >5. User reviews the items listed for each retailer,and decides which items and which retailer (Target or Walmart) based on availability, cost, distance and drive time.
->RELEASE 2.0 FEATURES BELOW (Release Date: TBD)
+>* RELEASE 2.0 FEATURES BELOW (Release Date: TBD)
 >6. The User has the option to build a shopping list for each retailer by selecting the "Add To Shopping List" button associated with the item. This will store the item on a shopping list associated with named retailer.
 >7. The User can then click the text "View Shopping List" that will take them to a new page showing the retailers they have shopping lists for (initially Target and Walmart).
 >8. The user then clicks on the retailer to view associated shopping list, and the view will display the list with items to purchase from that retailer. 
