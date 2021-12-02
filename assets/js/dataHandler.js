@@ -10,6 +10,11 @@ if (!shoppingList || !shoppingList.Target || !shoppingList.Walmart) {
 sessionStorage.clear();
 sessionStorage.setItem("shoppingList", JSON.stringify(shoppingList));
 
+
+/**
+ * removeAllChildNodes() - removes all elements contained in parent element 
+ * @param {DOM element} parent 
+ */
 var removeAllChildNodes = function (parent) {
   if (parent) {
     while (parent.firstChild) {
@@ -18,7 +23,16 @@ var removeAllChildNodes = function (parent) {
   }
 }
 
+
 // Address, Distance and Store Location function
+/**
+ * populateLocationElements() - uses the input address to locate nearest retailer
+ *   locations, then posts those locations along with drive-time and mileage to the
+ *   web page.
+ * @param {text} _inputAddress - shopper/user address 
+ * @returns {text} Target location Id - needed to identify the Target retailer location
+ *   for production lookup.
+ */
 var populateLocationElements = async function (_inputAddress) {
   var addrArray = _inputAddress.split(" ");
   var zipCode = addrArray[addrArray.length - 1];
@@ -86,10 +100,17 @@ var populateLocationElements = async function (_inputAddress) {
   walmartTrafficDriveTimeEl.textContent = "Current Traffic Time: " + jsonDrivingDistanceToWalmart.trafficTimeInMinutes + " Min";
   walmartHeaderEl.appendChild(walmartTrafficDriveTimeEl);
 
-
   return jsonTargetLocation.location_id; // need for target item lookup
 };
 
+
+/**
+ * populateItemElements() - accepts the Target location Id as well an item description
+ *   to facilitate finding and displaying the product item lists available for sale.  Note;
+ *   no location id is needed or used for Walmart 
+ * @param {*} location_id 
+ * @param {*} _itemDesc 
+ */
 var populateItemElements = async function (location_id, _itemDesc) {
   // Target Data
   var jsonTargetItemList = await targetProductLocator(location_id, _itemDesc);
@@ -165,6 +186,13 @@ var populateItemElements = async function (location_id, _itemDesc) {
   console.log(walmartItemsEl);
 };
 
+
+/**
+ * resetShopperAddr() - Resets the shopper address when returning from the
+ *   shopping list page.
+ * resetShopperAddr() - Resets the shopper address from session storage
+ *   when returning from the shopping list page. 
+ */
 var resetShopperAddr = async function () {
   var inputAddrEl = document.getElementById("address-input");
   inputAddrEl.value = shopperAddr;
@@ -172,6 +200,12 @@ var resetShopperAddr = async function () {
   sessionStorage.setItem("targetLocationId", targetLocationId);
   sessionStorage.setItem("shopperAddr", shopperAddr);
 };
+
+
+/**
+ * resetListItems() - Resets the item description and listed items from 
+ *   session storage when returning from the shopping list page. 
+ */
 var resetListItems = async function () {
   var itemDescEl = document.getElementById("item-desc");
   itemDescEl.value = itemDesc;
@@ -179,6 +213,11 @@ var resetListItems = async function () {
   await populateItemElements(targetLocationId, itemDesc);
 };
 
+
+/**
+ * resetPage() - Resets the shopper address, item description and item
+ *   lists when returning from rthe shopping list page.
+ */
 var resetPage = async function () {
   if (shopperAddr) {
     await resetShopperAddr();
@@ -188,8 +227,13 @@ var resetPage = async function () {
   }
 };
 
-resetPage();
 
+/**
+ * getShopperAddr() - An async event listener that is activated when the user
+ *   pushes the "Enter" button to enter the shopper address. It is "async" because
+ *   it executes the async function populateLocationElements().
+ * @param {object} event 
+ */
 var getShopperAddr = async function (event) {
   // prevent page from refreshing
   event.preventDefault();
@@ -200,10 +244,13 @@ var getShopperAddr = async function (event) {
   sessionStorage.setItem("targetLocationId", targetLocationId);
 };
 
-var enterBtnEl = document.getElementById("enter-button");
-enterBtnEl.addEventListener("click", getShopperAddr);
 
-
+/**
+ * listItems() - An async event listener that is activated when the user pushes
+ *   the "Search" button to enter an item description.  It is "async" because
+ *   it executes the async function populateItemElements();
+ * @param {object} event 
+ */
 var listItems = async function (event) {
   // prevent page from refreshing
   event.preventDefault();
@@ -215,10 +262,14 @@ var listItems = async function (event) {
   await populateItemElements(targetLocationId, itemDesc);
 };
 
-var searchBtnEl = document.getElementById("search-button");
-searchBtnEl.addEventListener("click", listItems);
 
-
+/**
+ * saveTargetItem() - An event listener that is activated when the user clicks
+ *   "Add To Shopping List" button for any listed item.  Presently this function
+ *   saves the associated item and it's data to the session object designated for
+ *   the shopping list data for the Target retailer location.
+ * @param {object} event 
+ */
 var saveTargetItem = function (event) {
   // prevent page from refreshing
   event.preventDefault();
@@ -234,6 +285,14 @@ var saveTargetItem = function (event) {
   sessionStorage.setItem("shoppingList", JSON.stringify(shoppingList));
 };
 
+
+/**
+ * saveWalmartItem() - An event listener that is activated when the user clicks
+ *   "Add To Shopping List" button for any listed item.  Presently this function
+ *   saves the associated item and it's data to the session object designated for
+ *   the shopping list data for the Walmart retailer location.
+ * @param {object} event 
+ */
 var saveWalmartItem = function (event) {
   // prevent page from refreshing
   event.preventDefault();
@@ -249,6 +308,11 @@ var saveWalmartItem = function (event) {
   sessionStorage.setItem("shoppingList", JSON.stringify(shoppingList));
 };
 
+
+/**
+ * viewShoppingList() - This function is deprecated. 
+ * @param {object} event 
+ */
 var viewShoppingList = function (event) {
   // prevent page from refreshing
   event.preventDefault();
@@ -278,6 +342,12 @@ var viewShoppingList = function (event) {
     walmartShoppingListEl.appendChild(itemEl);
   }
 }
+
+resetPage();
+var enterBtnEl = document.getElementById("enter-button");
+enterBtnEl.addEventListener("click", getShopperAddr);
+var searchBtnEl = document.getElementById("search-button");
+searchBtnEl.addEventListener("click", listItems);
 
 var targetItemsEl = document.getElementById("target-items");
 targetItemsEl.addEventListener("click", saveTargetItem);
